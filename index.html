@@ -1,0 +1,1189 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#163c2b">
+<meta name="description" content="SI UBED — asisten invoice digital dengan sentuhan budaya Sunda. Buat invoice, hitung pesanan, dan ngobrol dalam bahasa Sunda atau Indonesia.">
+<meta property="og:title" content="SI UBED — AI Invoice Basa Sunda">
+<meta property="og:description" content="Asisten usaha digital yang ramah, berbudaya Sunda, dan siap membantu membuat invoice.">
+<title>SI UBED — AI Invoice Basa Sunda</title>
+
+<style>
+:root {
+  --green:#163c2b;
+  --green2:#214d37;
+  --green3:#2d6247;
+  --cream:#f7f1e4;
+  --paper:#fffdf7;
+  --gold:#c9a45c;
+  --gold2:#e8d29c;
+  --ink:#24352a;
+  --muted:#778276;
+  --line:#e6dfd0;
+  --white:#fff;
+  --shadow:0 15px 45px rgba(26,50,34,.09);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--cream);color:var(--ink);
+  font-family:Inter,"Segoe UI",Arial,sans-serif;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+  outline:3px solid #c9a45c88;outline-offset:2px
+}
+.top-pattern{
+  height:7px;
+  background:repeating-linear-gradient(135deg,var(--gold) 0 7px,var(--green) 7px 14px,var(--gold2) 14px 21px);
+}
+header{
+  background:var(--green);color:var(--cream);
+  position:sticky;top:0;z-index:10;
+  border-bottom:1px solid #ffffff20;
+}
+.nav{
+  max-width:1440px;margin:auto;padding:13px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:15px;
+}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand-mark{
+  width:46px;height:46px;display:grid;place-items:center;
+  border:1px solid var(--gold);border-radius:14px;
+  color:var(--gold2);font-size:26px;font-weight:800;
+  background:linear-gradient(145deg,#28543b,#102b1e);
+}
+.brand h1{font-size:19px;letter-spacing:2px;margin:0}
+.brand small{display:block;color:#d4dcca;font-size:11px;margin-top:4px}
+.nav-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.nav-actions button,.nav-actions select{
+  border:1px solid #ffffff35;background:#ffffff0c;color:#fff;
+  border-radius:10px;padding:9px 11px;font-size:12px
+}
+.nav-actions select option{color:#172b20}
+.hero{
+  background:
+    radial-gradient(ellipse at 90% 15%,#c9a45c23,transparent 35%),
+    linear-gradient(120deg,#163c2b,#214b35);
+  color:var(--cream);padding:42px 24px 35px;position:relative;overflow:hidden;
+}
+.hero:after{
+  content:"ᮞ ᮥ ᮔ ᮪ ᮓ ᮃ";
+  position:absolute;right:-8px;bottom:-28px;
+  font-size:75px;letter-spacing:8px;color:#fff;opacity:.055;
+  transform:rotate(-8deg);pointer-events:none
+}
+.hero-inner{max-width:1440px;margin:auto;position:relative;z-index:1}
+.eyebrow{
+  color:var(--gold2);font-size:11px;font-weight:800;
+  letter-spacing:2.3px;text-transform:uppercase
+}
+.hero h2{font-size:clamp(28px,4vw,43px);line-height:1.15;margin:13px 0}
+.hero p{max-width:680px;line-height:1.75;color:#e3e9df;margin:0}
+.hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.tag{
+  padding:7px 11px;border:1px solid #ffffff2d;border-radius:30px;
+  color:#f2e7c9;font-size:11px;background:#ffffff09
+}
+main{max-width:1440px;margin:auto;padding:24px}
+.section-head{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:12px;margin-bottom:13px
+}
+.section-head h3{margin:0;font-size:17px}
+.section-head p{font-size:12px;color:var(--muted);margin:5px 0 0}
+.workspace{
+  display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);
+  gap:20px;align-items:start
+}
+.panel{
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:19px;overflow:hidden;box-shadow:var(--shadow);min-width:0
+}
+.panel-head{
+  padding:17px 19px;border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;gap:10px
+}
+.panel-head h3{margin:0;font-size:15px}
+.panel-head p{margin:5px 0 0;font-size:11px;color:var(--muted)}
+.live{
+  font-size:10px;color:#236342;background:#e8f2e6;
+  border-radius:30px;padding:6px 9px;white-space:nowrap
+}
+.chat-body{padding:16px}
+.chat-messages{
+  height:345px;overflow-y:auto;display:flex;flex-direction:column;
+  gap:13px;padding:2px 2px 12px;scroll-behavior:smooth
+}
+.message{display:flex;gap:9px;align-items:flex-start;max-width:94%}
+.message.user{align-self:flex-end;flex-direction:row-reverse}
+.avatar{
+  width:30px;height:30px;flex-shrink:0;display:grid;place-items:center;
+  background:var(--green);color:var(--gold2);border-radius:10px;font-size:12px;font-weight:800
+}
+.message.user .avatar{background:#e8dfc9;color:var(--green)}
+.bubble{
+  background:#f0eee4;border-radius:4px 14px 14px 14px;
+  padding:11px 13px;font-size:13px;line-height:1.65;overflow-wrap:anywhere
+}
+.message.user .bubble{background:var(--green);color:white;border-radius:14px 4px 14px 14px}
+.bubble .time{display:block;font-size:10px;opacity:.65;margin-top:6px}
+.quick-prompts{display:flex;gap:7px;flex-wrap:wrap;margin:2px 0 12px}
+.quick-prompts button{
+  background:transparent;border:1px solid #d9d1bf;border-radius:30px;
+  padding:7px 10px;font-size:11px;color:var(--green)
+}
+.quick-prompts button:hover{background:#e8efdf}
+.chat-input-wrap{border:1px solid #ded7c7;border-radius:14px;padding:9px;background:#fff}
+#chatInput{
+  border:0;outline:0;resize:vertical;min-height:48px;max-height:130px;
+  width:100%;background:transparent;font-size:13px;color:var(--ink)
+}
+.input-tools{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.tool-group{display:flex;gap:6px;flex-wrap:wrap}
+.icon-btn{
+  border:1px solid var(--line);background:#f8f5ec;color:var(--green);
+  border-radius:10px;padding:9px 10px;font-size:12px
+}
+.icon-btn.active{background:#e1efdd;border-color:#6a986f}
+.send-btn,.primary-btn{
+  border:0;background:var(--green);color:white;
+  border-radius:10px;padding:10px 14px;font-weight:700;font-size:12px
+}
+.send-btn:hover,.primary-btn:hover{background:var(--green3)}
+.note{font-size:10px;line-height:1.6;color:var(--muted);margin:10px 1px 0}
+.invoice-content{padding:18px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field.full{grid-column:1/-1}
+.field label{font-size:11px;font-weight:700;color:#5b6658}
+.field input,.field textarea,.field select{
+  width:100%;border:1px solid #ded7c7;border-radius:10px;
+  padding:10px 11px;background:#fffefa;color:var(--ink);font-size:12px;min-width:0
+}
+.field textarea{resize:vertical;min-height:65px}
+.divider{height:1px;background:var(--line);margin:17px 0}
+.items-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+.items-head h4{font-size:13px;margin:0}
+.small-btn{
+  border:1px solid #d7c9a6;background:#f6f0df;color:var(--green);
+  border-radius:9px;padding:8px 10px;font-size:11px;font-weight:700
+}
+.item-row{
+  display:grid;grid-template-columns:minmax(0,1fr) 65px 105px 31px;
+  gap:7px;margin-bottom:8px;align-items:center
+}
+.item-row input{
+  min-width:0;width:100%;border:1px solid #ded7c7;border-radius:9px;
+  padding:10px 8px;background:white;font-size:12px
+}
+.item-row .remove{
+  height:33px;border:0;border-radius:8px;background:#f7e9e5;
+  color:#a34234;font-size:17px
+}
+.money-box{background:#f4f0e5;border:1px solid #e8dfca;border-radius:13px;padding:14px}
+.money-line{display:flex;justify-content:space-between;gap:12px;margin:7px 0;font-size:12px}
+.money-line.total{
+  border-top:1px solid #d6c9a9;padding-top:12px;margin-top:12px;
+  font-size:16px;font-weight:800;color:var(--green)
+}
+.money-line input{
+  width:110px;border:1px solid #ded7c7;border-radius:7px;padding:5px 7px;text-align:right
+}
+.action-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}
+.action-grid button{padding:12px 9px}
+.secondary-btn{
+  border:1px solid #d8cfbd;background:#fffdf7;color:var(--green);
+  border-radius:10px;font-weight:700;font-size:12px
+}
+.whatsapp-btn{background:#167849;color:#fff;border:0;border-radius:10px;font-weight:700;font-size:12px}
+.danger-btn{background:#fff1ed;color:#9b4333;border:1px solid #f0d0c7;border-radius:10px;font-size:12px}
+.history-panel{margin-top:20px}
+.history-list{padding:12px 18px}
+.history-entry{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:12px 0;border-bottom:1px solid var(--line)
+}
+.history-entry:last-child{border-bottom:0}
+.history-entry strong{font-size:12px;display:block}
+.history-entry small{display:block;color:var(--muted);font-size:10px;margin-top:5px}
+.history-actions{display:flex;gap:6px;flex-wrap:wrap}
+.history-actions button{padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--green);font-size:10px}
+.empty{font-size:12px;color:var(--muted);text-align:center;padding:18px}
+footer{
+  background:var(--green);color:#e8e8d8;margin-top:35px;padding:24px;
+  text-align:center;font-size:11px;line-height:1.8
+}
+footer strong{color:var(--gold2);letter-spacing:2px}
+.toast{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  background:#193c2b;color:#fff;padding:12px 18px;border-radius:12px;
+  font-size:12px;box-shadow:var(--shadow);z-index:100;display:none;
+  max-width:90vw;text-align:center
+}
+.print-only{display:none}
+@media(max-width:900px){
+  .workspace{grid-template-columns:1fr}
+  .chat-messages{height:300px}
+}
+@media(max-width:540px){
+  .nav{padding:11px 14px;align-items:flex-start}
+  .brand h1{font-size:16px}
+  .brand small{font-size:9px}
+  .brand-mark{width:39px;height:39px}
+  .nav-actions{justify-content:flex-end}
+  .nav-actions button,.nav-actions select{padding:8px;font-size:10px}
+  .hero{padding:31px 17px}
+  main{padding:14px}
+  .form-grid{gap:10px}
+  .invoice-content{padding:13px}
+  .item-row{grid-template-columns:minmax(0,1fr) 48px 82px 27px;gap:5px}
+  .item-row input{font-size:11px;padding:9px 5px}
+  .item-row .remove{height:31px}
+  .chat-body{padding:12px}
+  .chat-messages{height:290px}
+  .panel-head{padding:14px}
+}
+@media print{
+  body{background:white!important;color:#222}
+  body *{visibility:hidden!important}
+  #printInvoice,#printInvoice *{visibility:visible!important}
+  #printInvoice{
+    display:block!important;position:absolute;left:0;top:0;width:100%;
+    padding:20px;background:white!important;color:#222!important;
+    border:0!important;box-shadow:none!important
+  }
+  #printInvoice .print-only{display:block!important}
+  #printInvoice .no-print{display:none!important}
+  #printInvoice h2{font-size:26px;margin-bottom:4px}
+  #printInvoice .print-brand{color:#214d37!important}
+  #printInvoice table{width:100%;border-collapse:collapse;margin-top:20px;font-size:12px}
+  #printInvoice th,#printInvoice td{border:1px solid #ddd;padding:10px;text-align:left}
+  #printInvoice th{background:#edf1e9!important}
+  #printInvoice .print-total{margin:20px 0 0 auto;width:260px}
+  #printInvoice .print-total div{display:flex;justify-content:space-between;padding:6px 0}
+}
+</style>
+</head>
+
+<body>
+<div class="top-pattern"></div>
+
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="brand-mark">ᮞ</div>
+      <div>
+        <h1>SI UBED</h1>
+        <small>AI INVOICE · RASA SUNDA</small>
+      </div>
+    </div>
+    <div class="nav-actions">
+      <select id="language" aria-label="Bahasa percakapan">
+        <option value="su">Basa Sunda</option>
+        <option value="id">Bahasa Indonesia</option>
+      </select>
+      <button id="voiceToggle" type="button" title="Aktifkan atau matikan suara">🔊 Suara ON</button>
+      <button id="historyJump" type="button">Riwayat</button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">ᮘᮞ ᮞᮥᮔ᮪ᮓ · ASISTEN USAHA DIGITAL</div>
+    <h2>Ngobrol heula, invoice beres. ✦</h2>
+    <p>
+      Wilujeng sumping, Bos! SI UBED ngabantosan nyieun invoice,
+      ngitung pesenan, jeung nyiapkeun tagihan. Ngobrol santai dina
+      basa Sunda atawa Indonesia, teu kudu ribet.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">✦ Motif budaya Sunda</span>
+      <span class="tag">♫ Suara AI</span>
+      <span class="tag">▤ Invoice otomatis</span>
+      <span class="tag">◈ Gratis di browser</span>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="workspace">
+
+    <!-- CHAT ASSISTANT -->
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h3>✦ Obrolan jeung SI UBED</h3>
+          <p>Asisten usaha anjeun, Bos.</p>
+        </div>
+        <span class="live">● SIAP NGABANTOSAN</span>
+      </div>
+
+      <div class="chat-body">
+        <div class="chat-messages" id="chatMessages" aria-live="polite">
+          <div class="message">
+            <div class="avatar">UB</div>
+            <div class="bubble">
+              Sampurasun, Bos! 👋 Abdi SI UBED. Hayu urang damel babarengan.
+              <br><br>
+              Bos tiasa nyarios sapertos kieu:
+              <br>• “Jieun invoice keur Kang Dadan.”
+              <br>• “Kaos 5, hijianna 75 rébu.”
+              <br>• “Tambahkeun diskon 10 persén.”
+              <br><br>
+              Muhun, Bos, urang mimitian ti mana?
+              <span class="time">SI UBED · ayeuna</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="quick-prompts">
+          <button type="button" data-prompt="Jieun invoice keur Kang Dadan.">＋ Jieun invoice</button>
+          <button type="button" data-prompt="Kaos 5, hijianna 75 rébu.">▤ Contoh pesenan</button>
+          <button type="button" data-prompt="Tulung itung total invoice ayeuna.">∑ Itung total</button>
+          <button type="button" data-prompt="Kumaha cara nyimpen invoice jadi PDF?">? Pitulung</button>
+        </div>
+
+        <div class="chat-input-wrap">
+          <textarea id="chatInput" rows="2" placeholder="Tulis pesen, Bos... contoh: Kaos 5, hijianna 75 rébu."></textarea>
+          <div class="input-tools">
+            <div class="tool-group">
+              <button class="icon-btn" id="micBtn" type="button" title="Gunakan mikrofon">🎙️ Ngomong</button>
+              <button class="icon-btn" id="repeatBtn" type="button" title="Ulangi suara terakhir">🔁 Ulangi</button>
+            </div>
+            <button class="send-btn" id="sendBtn" type="button">Kirim ➤</button>
+          </div>
+        </div>
+        <p class="note">
+          Catetan: versi awal memakai asisten berbasis aturan di browser,
+          bukan model AI cloud. Suara dan pengenalan ucapan bergantung
+          pada dukungan browser dan bahasa yang tersedia.
+        </p>
+      </div>
+    </section>
+
+    <!-- INVOICE BUILDER -->
+    <section class="panel" id="invoicePanel">
+      <div class="panel-head">
+        <div>
+          <h3>▤ Invoice Studio</h3>
+          <p>Tagihan rapi, itungan akurat.</p>
+        </div>
+        <span class="live">● OTOMATIS</span>
+      </div>
+
+      <div class="invoice-content" id="printInvoice">
+        <div class="print-only">
+          <div class="print-brand"><strong>SI UBED</strong> · INVOICE USAHA</div>
+          <hr>
+        </div>
+
+        <div class="form-grid no-print">
+          <div class="field">
+            <label for="businessName">Nama usaha</label>
+            <input id="businessName" placeholder="Nama usaha anjeun">
+          </div>
+          <div class="field">
+            <label for="invoiceNumber">Nomor invoice</label>
+            <input id="invoiceNumber" readonly>
+          </div>
+          <div class="field">
+            <label for="customerName">Nama pelanggan</label>
+            <input id="customerName" placeholder="Nama pelanggan">
+          </div>
+          <div class="field">
+            <label for="invoiceDate">Tanggal invoice</label>
+            <input id="invoiceDate" type="date">
+          </div>
+          <div class="field full">
+            <label for="businessContact">Kontak / alamat usaha (opsional)</label>
+            <input id="businessContact" placeholder="WhatsApp, alamat, atau nama toko">
+          </div>
+        </div>
+
+        <div class="print-only">
+          <h2 id="printBusinessName" class="print-brand">Nama Usaha</h2>
+          <p id="printBusinessContact"></p>
+          <h3>INVOICE <span id="printInvoiceNumber"></span></h3>
+          <p>Pelanggan: <strong id="printCustomer"></strong></p>
+          <p>Tanggal: <span id="printDate"></span></p>
+        </div>
+
+        <div class="divider no-print"></div>
+        <div class="items-head no-print">
+          <h4>Rincian pesenan</h4>
+          <button class="small-btn" id="addItemBtn" type="button">＋ Tambah item</button>
+        </div>
+
+        <div id="itemsList" class="no-print"></div>
+
+        <div class="print-only">
+          <table>
+            <thead>
+              <tr><th>Nama barang</th><th>Jumlah</th><th>Harga satuan</th><th>Subtotal</th></tr>
+            </thead>
+            <tbody id="printItems"></tbody>
+          </table>
+        </div>
+
+        <div class="divider no-print"></div>
+
+        <div class="form-grid no-print">
+          <div class="field">
+            <label for="discount">Diskon (%)</label>
+            <input id="discount" type="number" min="0" max="100" step="0.01" value="0">
+          </div>
+          <div class="field">
+            <label for="paid">Sudah dibayar (Rp)</label>
+            <input id="paid" type="number" min="0" step="1" value="0">
+          </div>
+          <div class="field full">
+            <label for="invoiceNote">Catetan / cara pembayaran</label>
+            <textarea id="invoiceNote" placeholder="Contoh: Hatur nuhun kana pesenanana. Pembayaran via transfer."></textarea>
+          </div>
+        </div>
+
+        <div class="print-only">
+          <p><strong>Catatan:</strong> <span id="printNote"></span></p>
+        </div>
+
+        <div class="money-box">
+          <div class="money-line"><span>Subtotal</span><strong id="subtotalText">Rp0</strong></div>
+          <div class="money-line"><span>Diskon</span><strong id="discountText">Rp0</strong></div>
+          <div class="money-line total"><span>TOTAL</span><strong id="totalText">Rp0</strong></div>
+          <div class="money-line"><span>Sudah dibayar</span><strong id="paidText">Rp0</strong></div>
+          <div class="money-line"><span>Sisa tagihan</span><strong id="remainingText">Rp0</strong></div>
+        </div>
+
+        <div class="print-only print-total">
+          <div><span>Subtotal</span><strong id="printSubtotal"></strong></div>
+          <div><span>Diskon</span><strong id="printDiscount"></strong></div>
+          <div><span>Total</span><strong id="printTotal"></strong></div>
+          <div><span>Sudah dibayar</span><strong id="printPaid"></strong></div>
+          <div><span>Sisa tagihan</span><strong id="printRemaining"></strong></div>
+        </div>
+
+        <div class="action-grid no-print">
+          <button class="primary-btn" id="saveBtn" type="button">▣ Simpan invoice</button>
+          <button class="secondary-btn" id="printBtn" type="button">⇩ Cetak / PDF</button>
+          <button class="whatsapp-btn" id="whatsappBtn" type="button">◉ Bagikan WhatsApp</button>
+          <button class="secondary-btn" id="newBtn" type="button">＋ Invoice baru</button>
+          <button class="danger-btn" id="clearBtn" type="button" style="grid-column:1/-1">Kosongkan formulir</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="panel history-panel" id="historyPanel">
+    <div class="panel-head">
+      <div>
+        <h3>◷ Riwayat invoice</h3>
+        <p>Invoice yang disimpan di browser ini.</p>
+      </div>
+      <button class="secondary-btn" id="exportBtn" type="button" style="padding:8px 10px">Ekspor data</button>
+    </div>
+    <div class="history-list" id="historyList">
+      <div class="empty">Belum ada invoice yang disimpan.</div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <strong>SI UBED</strong><br>
+  Asisten Usaha Digital · Dumasar kana sumanget budaya Sunda.<br>
+  <span>Versi 1.0 · Utamakan itungan yang benar, usaha yang lancar, sareng silaturahmi.</span>
+</footer>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+"use strict";
+
+/* =========================================================
+   SI UBED V1.0
+   Browser-only prototype: no API key and no paid backend.
+   ========================================================= */
+
+const $ = id => document.getElementById(id);
+const STORAGE_KEY = "si_ubed_invoice_v1";
+const SETTINGS_KEY = "si_ubed_settings_v1";
+
+let items = [];
+let history = [];
+let voiceEnabled = true;
+let lastSpoken = "";
+let currentInvoiceId = null;
+let recognition = null;
+let toastTimer = null;
+
+const rupiah = amount => new Intl.NumberFormat("id-ID", {
+  style:"currency", currency:"IDR", maximumFractionDigits:0
+}).format(Math.round(Number(amount) || 0));
+
+const escapeHTML = value => String(value ?? "").replace(/[&<>"']/g, ch => ({
+  "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+}[ch]));
+
+function localDate(){
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")}`;
+}
+
+function generateNumber(){
+  const d = new Date();
+  const stamp = `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}`;
+  return `UB-${stamp}-${String(Math.floor(Math.random()*9000)+1000)}`;
+}
+
+function toast(message){
+  $("toast").textContent = message;
+  $("toast").style.display = "block";
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => $("toast").style.display = "none", 2800);
+}
+
+function getLanguage(){
+  return $("language").value;
+}
+
+function moneyFromText(text){
+  const s = String(text).toLowerCase().trim();
+  const patterns = [
+    {re:/(\d+(?:[.,]\d+)?)\s*(?:juta|jt)\b/, factor:1000000},
+    {re:/(\d+(?:[.,]\d+)?)\s*(?:ribu|rb|k)\b/, factor:1000},
+    {re:/rp\s*([\d.,]+)/, factor:1},
+    {re:/(\d[\d.,]*)\s*rupiah\b/, factor:1}
+  ];
+
+  for(const p of patterns){
+    const m = s.match(p.re);
+    if(m){
+      let raw = m[1];
+      let n;
+      if(raw.includes(",") && !raw.includes(".")){
+        const parts = raw.split(",");
+        n = parts[1].length <= 2
+          ? Number(parts.join("."))
+          : Number(parts.join(""));
+      }else{
+        n = Number(raw.replace(/[.,]/g,""));
+      }
+      if(Number.isFinite(n)) return Math.round(n*p.factor);
+    }
+  }
+
+  // Support plain numbers when explicitly near price-related words.
+  const match = s.match(/(?:harga|hargana|satuan|seharga|jadi|bayar)\s*(?:rp)?\s*(\d[\d.]*)/);
+  if(match) return Number(match[1].replace(/\./g,"")) || 0;
+  return null;
+}
+
+function findQuantity(text){
+  const patterns = [
+    /(?:sebanyak|jumlah|qty|pesan|pesen|pesanan|keur|beli|ada)\s*(\d+)/i,
+    /(\d+)\s*(?:buah|pcs|biji|kaos|baju|gelas|kotak|unit|lembar|paket|barang)/i
+  ];
+  for(const p of patterns){
+    const m = text.match(p);
+    if(m) return Number(m[1]);
+  }
+  return null;
+}
+
+function getTotals(){
+  const subtotal = items.reduce((sum,item) => {
+    const qty = Math.max(0, Number(item.qty)||0);
+    const price = Math.max(0, Number(item.price)||0);
+    return sum + qty*price;
+  },0);
+
+  const percent = Math.min(100,Math.max(0,Number($("discount").value)||0));
+  const discountAmount = Math.round(subtotal*percent/100);
+  const total = Math.max(0,subtotal-discountAmount);
+  const paid = Math.max(0,Number($("paid").value)||0);
+  const remaining = Math.max(0,total-paid);
+  return {subtotal,percent,discountAmount,total,paid,remaining};
+}
+
+function renderItems(){
+  const list = $("itemsList");
+  if(!items.length){
+    list.innerHTML = '<div class="empty">Can tambah barang ku tombol “Tambah item”, Bos.</div>';
+    renderTotals();
+    return;
+  }
+
+  list.innerHTML = items.map((item,index)=>`
+    <div class="item-row" data-index="${index}">
+      <input aria-label="Nama barang ${index+1}" data-field="name" value="${escapeHTML(item.name)}" placeholder="Nama barang">
+      <input aria-label="Jumlah ${index+1}" data-field="qty" type="number" min="0" step="1" value="${Number(item.qty)||0}">
+      <input aria-label="Harga ${index+1}" data-field="price" type="number" min="0" step="1" value="${Number(item.price)||0}" placeholder="Harga Rp">
+      <button class="remove" type="button" data-remove="${index}" aria-label="Hapus barang">×</button>
+    </div>
+  `).join("");
+
+  list.querySelectorAll("input").forEach(input=>{
+    input.addEventListener("input",()=>{
+      const row = input.closest(".item-row");
+      const index = Number(row.dataset.index);
+      const field = input.dataset.field;
+      if(field==="name") items[index].name = input.value;
+      else items[index][field] = Math.max(0,Number(input.value)||0);
+      renderTotals();
+    });
+  });
+
+  list.querySelectorAll("[data-remove]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      items.splice(Number(btn.dataset.remove),1);
+      renderItems();
+    });
+  });
+
+  renderTotals();
+}
+
+function renderTotals(){
+  const t = getTotals();
+  $("subtotalText").textContent = rupiah(t.subtotal);
+  $("discountText").textContent = rupiah(t.discountAmount);
+  $("totalText").textContent = rupiah(t.total);
+  $("paidText").textContent = rupiah(t.paid);
+  $("remainingText").textContent = rupiah(t.remaining);
+}
+
+function addItem(name="Barang anyar",qty=1,price=0){
+  items.push({name,qty,price});
+  renderItems();
+}
+
+function snapshot(){
+  const t = getTotals();
+  return {
+    id: currentInvoiceId || `inv-${Date.now()}-${Math.random().toString(36).slice(2,7)}`,
+    number:$("invoiceNumber").value,
+    businessName:$("businessName").value.trim(),
+    businessContact:$("businessContact").value.trim(),
+    customerName:$("customerName").value.trim(),
+    date:$("invoiceDate").value,
+    items:items.map(i=>({
+      name:String(i.name||""),
+      qty:Math.max(0,Number(i.qty)||0),
+      price:Math.max(0,Number(i.price)||0)
+    })),
+    discountPercent:t.percent,
+    paid:t.paid,
+    note:$("invoiceNote").value.trim(),
+    subtotal:t.subtotal,
+    discountAmount:t.discountAmount,
+    total:t.total,
+    remaining:t.remaining,
+    updatedAt:new Date().toISOString()
+  };
+}
+
+function validateInvoice(){
+  if(!items.length){
+    toast("Tambahkan minimal satu barang terlebih dahulu, Bos.");
+    return false;
+  }
+  if(items.some(i=>!String(i.name||"").trim())){
+    toast("Nama barang belum lengkap.");
+    return false;
+  }
+  if(items.some(i=>Number(i.qty)<=0)){
+    toast("Jumlah barang harus lebih dari nol.");
+    return false;
+  }
+  if(items.some(i=>Number(i.price)<0)){
+    toast("Harga tidak boleh negatif.");
+    return false;
+  }
+  return true;
+}
+
+function saveInvoice(){
+  if(!validateInvoice()) return false;
+  const data = snapshot();
+  currentInvoiceId = data.id;
+  const index = history.findIndex(h=>h.id===data.id);
+  if(index>=0) history[index]=data;
+  else history.unshift(data);
+
+  history = history.slice(0,100);
+  try{
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(history));
+    renderHistory();
+    toast("Invoice berhasil disimpan di browser ini, Bos!");
+    return true;
+  }catch(error){
+    toast("Penyimpanan gagal. Periksa ruang penyimpanan browser.");
+    return false;
+  }
+}
+
+function loadInvoice(data){
+  currentInvoiceId = data.id;
+  $("invoiceNumber").value = data.number || generateNumber();
+  $("businessName").value = data.businessName || "";
+  $("businessContact").value = data.businessContact || "";
+  $("customerName").value = data.customerName || "";
+  $("invoiceDate").value = data.date || localDate();
+  $("discount").value = data.discountPercent || 0;
+  $("paid").value = data.paid || 0;
+  $("invoiceNote").value = data.note || "";
+  items = (data.items||[]).map(i=>({...i}));
+  renderItems();
+  $("invoicePanel").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function renderHistory(){
+  const el = $("historyList");
+  if(!history.length){
+    el.innerHTML='<div class="empty">Belum ada invoice yang disimpan.</div>';
+    return;
+  }
+  el.innerHTML = history.map(data=>`
+    <div class="history-entry">
+      <div>
+        <strong>${escapeHTML(data.customerName||"Pelanggan")}</strong>
+        <small>${escapeHTML(data.number||"Tanpa nomor")} · ${escapeHTML(data.date||"")} · ${rupiah(data.total)}</small>
+      </div>
+      <div class="history-actions">
+        <button type="button" data-load="${escapeHTML(data.id)}">Buka</button>
+        <button type="button" data-delete="${escapeHTML(data.id)}">Hapus</button>
+      </div>
+    </div>
+  `).join("");
+
+  el.querySelectorAll("[data-load]").forEach(btn=>btn.addEventListener("click",()=>{
+    const data = history.find(h=>h.id===btn.dataset.load);
+    if(data) loadInvoice(data);
+  }));
+  el.querySelectorAll("[data-delete]").forEach(btn=>btn.addEventListener("click",()=>{
+    if(!confirm("Hapus invoice ini dari riwayat browser?")) return;
+    history = history.filter(h=>h.id!==btn.dataset.delete);
+    try{localStorage.setItem(STORAGE_KEY,JSON.stringify(history));}
+    catch(e){}
+    renderHistory();
+    toast("Invoice dihapus dari riwayat.");
+  }));
+}
+
+function newInvoice(){
+  currentInvoiceId = null;
+  $("invoiceNumber").value = generateNumber();
+  $("customerName").value = "";
+  $("invoiceDate").value = localDate();
+  $("discount").value = 0;
+  $("paid").value = 0;
+  $("invoiceNote").value = "";
+  items = [{name:"",qty:1,price:0}];
+  renderItems();
+  $("invoicePanel").scrollIntoView({behavior:"smooth",block:"start"});
+  toast("Invoice baru siap diisi, Bos.");
+}
+
+function preparePrint(){
+  const data = snapshot();
+  $("printBusinessName").textContent = data.businessName || "Nama Usaha";
+  $("printBusinessContact").textContent = data.businessContact;
+  $("printInvoiceNumber").textContent = data.number;
+  $("printCustomer").textContent = data.customerName || "Pelanggan";
+  $("printDate").textContent = data.date || "";
+  $("printNote").textContent = data.note || "-";
+  $("printItems").innerHTML = data.items.map(item=>`
+    <tr>
+      <td>${escapeHTML(item.name)}</td>
+      <td>${item.qty}</td>
+      <td>${rupiah(item.price)}</td>
+      <td>${rupiah(item.qty*item.price)}</td>
+    </tr>
+  `).join("");
+  $("printSubtotal").textContent = rupiah(data.subtotal);
+  $("printDiscount").textContent = rupiah(data.discountAmount);
+  $("printTotal").textContent = rupiah(data.total);
+  $("printPaid").textContent = rupiah(data.paid);
+  $("printRemaining").textContent = rupiah(data.remaining);
+}
+
+function printInvoice(){
+  if(!validateInvoice()) return;
+  preparePrint();
+  window.print();
+}
+
+function invoiceMessage(){
+  const d = snapshot();
+  const lines = [
+    `*INVOICE ${d.number}*`,
+    `Usaha: ${d.businessName||"-"}`,
+    `Pelanggan: ${d.customerName||"-"}`,
+    `Tanggal: ${d.date||"-"}`,
+    "",
+    ...d.items.map(i=>`${i.name} (${i.qty} x ${rupiah(i.price)}) = ${rupiah(i.qty*i.price)}`),
+    "",
+    `Subtotal: ${rupiah(d.subtotal)}`,
+    `Diskon: ${rupiah(d.discountAmount)}`,
+    `*TOTAL: ${rupiah(d.total)}*`,
+    `Dibayar: ${rupiah(d.paid)}`,
+    `Sisa tagihan: ${rupiah(d.remaining)}`,
+    "",
+    d.note || "Hatur nuhun kana kapercayaanana. 🙏",
+    "",
+    "Dibuat dengan SI UBED"
+  ];
+  return lines.join("\n");
+}
+
+function shareWhatsApp(){
+  if(!validateInvoice()) return;
+  const url = "https://wa.me/?text="+encodeURIComponent(invoiceMessage());
+  window.open(url,"_blank","noopener,noreferrer");
+}
+
+function exportHistory(){
+  const blob = new Blob([JSON.stringify(history,null,2)],{type:"application/json"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "si-ubed-riwayat-invoice.json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  toast("Ekspor data dimulai.");
+}
+
+/* ---------------- CHAT & VOICE ---------------- */
+
+function addMessage(text,who="assistant"){
+  const box = $("chatMessages");
+  const div = document.createElement("div");
+  div.className = `message ${who==="user"?"user":""}`;
+  const avatar = document.createElement("div");
+  avatar.className = "avatar";
+  avatar.textContent = who==="user"?"B":"UB";
+  const bubble = document.createElement("div");
+  bubble.className = "bubble";
+  bubble.textContent = text;
+  const time = document.createElement("span");
+  time.className = "time";
+  time.textContent = who==="user"?"Anjeun · ayeuna":"SI UBED · ayeuna";
+  bubble.appendChild(time);
+  div.append(avatar,bubble);
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function speak(text){
+  lastSpoken = text;
+  if(!voiceEnabled || !("speechSynthesis" in window)) return;
+  window.speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  const language = getLanguage();
+  utterance.lang = language==="su"?"id-ID":"id-ID";
+  utterance.rate = 0.94;
+  utterance.pitch = 1.0;
+
+  // Pilih suara Indonesia yang tersedia; dukungan suara Sunda asli
+  // bergantung pada sistem operasi/browser.
+  const voices = window.speechSynthesis.getVoices();
+  const preferred = voices.find(v=>/id[-_]ID/i.test(v.lang))
+                 || voices.find(v=>/indones/i.test(v.name));
+  if(preferred) utterance.voice = preferred;
+  window.speechSynthesis.speak(utterance);
+}
+
+function sayReply(text){
+  addMessage(text,"assistant");
+  speak(text);
+}
+
+function setField(id,value){
+  if(value!==undefined && value!==null && String(value).trim()!==""){
+    $(id).value = value;
+  }
+}
+
+function detectCustomer(text){
+  const patterns = [
+    /(?:keur|untuk|nama konsum[e]?n(?:na)?|pelanggan(?:na)?|customer)\s+([A-ZÀ-ÖØ-Þ][\wÀ-ÿ'-]*(?:\s+[A-ZÀ-ÖØ-Þ][\wÀ-ÿ'-]*){0,3})/i,
+    /(?:keur|untuk)\s+(kang\s+[\w'-]+(?:\s+[\w'-]+)?)/i
+  ];
+  for(const p of patterns){
+    const m=text.match(p);
+    if(m) return m[1].replace(/[.,!?]+$/,"").trim();
+  }
+  return null;
+}
+
+function humanMoney(n){
+  return new Intl.NumberFormat("id-ID",{maximumFractionDigits:0}).format(n);
+}
+
+function replyTo(text){
+  const lower = text.toLowerCase();
+  const lang = getLanguage();
+
+  if(/(bantuan|pitulung|cara pakai|kumaha cara|help|fitur)/i.test(lower)){
+    return lang==="su"
+      ? "Muhun, Bos! Abdi tiasa ngabantosan nyusun invoice, nambihan barang, ngitung diskon, nyimpen riwayat, nyitak PDF, sareng ngabagikeun tagihan liwat WhatsApp. Contona: “Kaos 5, hijianna 75 rébu.”"
+      : "Siap, Bos! Saya bisa membantu menyusun invoice, menambah barang, menghitung diskon, menyimpan riwayat, mencetak PDF, dan membagikan tagihan lewat WhatsApp. Contoh: “Kaos 5, satuannya 75 ribu.”";
+  }
+
+  if(/(pdf|cetak|print|nyitak|nyimpen invoice)/i.test(lower)){
+    return lang==="su"
+      ? "Gampil, Bos. Pastikeun invoice geus dieusi, teras klik tombol “Cetak / PDF”. Dina jandéla print, pilih “Save as PDF” pikeun nyimpenna."
+      : "Mudah, Bos. Isi invoice terlebih dahulu, lalu klik “Cetak / PDF”. Pada jendela cetak browser, pilih “Save as PDF” untuk menyimpan.";
+  }
+
+  if(/(whatsapp|wa|bagikeun|kirim tagihan)/i.test(lower)){
+    return lang==="su"
+      ? "Klik “Bagikan WhatsApp”, Bos. Rincian invoice bakal disiapkeun jadi pesen. Pariksa deui pesenna saméméh dikirim."
+      : "Klik “Bagikan WhatsApp”, Bos. Rincian invoice akan disiapkan menjadi pesan. Periksa pesannya sebelum dikirim.";
+  }
+
+  if(/(halo|hai|hello|sampurasun|assalamualaikum|punten|wilujeng)/i.test(lower)){
+    return lang==="su"
+      ? "Sampurasun, Bos! Kumaha damang? Hayu urang bereskeun urusan invoice bari santai. Aya pesenan naon ayeuna?"
+      : "Halo, Bos! Apa kabar? Yuk, kita bereskan invoice dengan santai. Ada pesanan apa hari ini?";
+  }
+
+  if(/(hatur nuhun|terima kasih|nuhun|makasih|thanks)/i.test(lower)){
+    return lang==="su"
+      ? "Sami-sami, Bos! Mugia usahana lancar, rejekina seueur, sareng konsuménna tambah seueur. 🙏"
+      : "Sama-sama, Bos! Semoga usahanya lancar, rezekinya bertambah, dan pelanggan makin banyak. 🙏";
+  }
+
+  if(/(hitung|itung|total invoice|total ayeuna|itung total)/i.test(lower)){
+    const t=getTotals();
+    return lang==="su"
+      ? `Muhun, Bos! Subtotalna ${rupiah(t.subtotal)}, diskonna ${rupiah(t.discountAmount)}, totalna ${rupiah(t.total)}. Geus dibayar ${rupiah(t.paid)}, janten sesana ${rupiah(t.remaining)}.`
+      : `Siap, Bos! Subtotal ${rupiah(t.subtotal)}, diskon ${rupiah(t.discountAmount)}, total ${rupiah(t.total)}. Sudah dibayar ${rupiah(t.paid)}, sehingga sisanya ${rupiah(t.remaining)}.`;
+  }
+
+  const customer=detectCustomer(text);
+  if(customer){
+    $("customerName").value=customer;
+    return lang==="su"
+      ? `Muhun, Bos! Nami konsuménna parantos dieusi: ${customer}. Ayeuna tinggal tambahkeun barang sareng hargana.`
+      : `Siap, Bos! Nama pelanggan sudah diisi: ${customer}. Selanjutnya tambahkan barang dan harganya.`;
+  }
+
+  const discountMatch=lower.match(/diskon\s*(\d+(?:[.,]\d+)?)\s*(?:%|persen|persén)/);
+  if(discountMatch){
+    const val=Number(discountMatch[1].replace(",","."));
+    if(val>=0 && val<=100){
+      $("discount").value=val;
+      renderTotals();
+      const t=getTotals();
+      return lang==="su"
+        ? `Muhun, Bos! Diskon ${val}% parantos dipasang. Jumlah diskonna ${rupiah(t.discountAmount)}, totalna ${rupiah(t.total)}.`
+        : `Siap, Bos! Diskon ${val}% sudah diterapkan. Nilai diskon ${rupiah(t.discountAmount)}, total menjadi ${rupiah(t.total)}.`;
+    }
+  }
+
+  const paidMatch=lower.match(/(?:sudah dibayar|geus dibayar|dibayar|dp|uang muka)\s*(?:rp)?\s*([\d.]+)/);
+  if(paidMatch){
+    $("paid").value=Number(paidMatch[1].replace(/\./g,""))||0;
+    renderTotals();
+    const t=getTotals();
+    return lang==="su"
+      ? `Muhun, Bos! Pembayaran parantos dicatet. Sésa tagihan ayeuna ${rupiah(t.remaining)}.`
+      : `Siap, Bos! Pembayaran sudah dicatat. Sisa tagihan sekarang ${rupiah(t.remaining)}.`;
+  }
+
+  const qty=findQuantity(text);
+  const price=moneyFromText(text);
+  const itemNameMatch=text.match(/(?:barang|item|produk|pesen|pesan)\s+([A-Za-zÀ-ÿ][\wÀ-ÿ -]{1,30})/i);
+  const knownItem=text.match(/\b(kaos|baju|kemeja|celana|gelas|sepatu|tas|mug|banner|stiker|desain|logo|website|paket)\b/i);
+
+  if(qty!==null || price!==null){
+    let name=knownItem?knownItem[1]:null;
+    if(!name && itemNameMatch) name=itemNameMatch[1].trim();
+    if(!name) name="Barang pesanan";
+
+    // Update an existing generic line if it is still blank or generic;
+    // otherwise create a new line to avoid silently overwriting data.
+    const existing=items.find(i=>!i.name.trim() || i.name==="Barang anyar");
+    if(existing){
+      if(qty!==null) existing.qty=qty;
+      if(price!==null) existing.price=price;
+      if(name!=="Barang pesanan") existing.name=name;
+    }else{
+      items.push({
+        name,
+        qty:qty!==null?qty:1,
+        price:price!==null?price:0
+      });
+    }
+
+    renderItems();
+    const t=getTotals();
+    return lang==="su"
+      ? `Muhun, Bos! Pesanan parantos diasupkeun. ${name}: ${qty!==null?qty:1} unit, harga satuan ${rupiah(price!==null?price:0)}. Total invoice ayeuna ${rupiah(t.total)}. Upami harga atanapi jumlahna béda, tiasa dirobih langsung dina formulir.`
+      : `Siap, Bos! Pesanan sudah dimasukkan. ${name}: ${qty!==null?qty:1} unit, harga satuan ${rupiah(price!==null?price:0)}. Total invoice sekarang ${rupiah(t.total)}. Jika harga atau jumlahnya berbeda, silakan ubah langsung di formulir.`;
+  }
+
+  if(/(invoice|tagihan|buatkan|buat|jieun|jieunkeun|nyieun)/i.test(lower)){
+    return lang==="su"
+      ? "Muhun, Bos! Hayu urang jieun invoice. Sebutkeun nami konsumén, barangna naon, jumlahna sabaraha, sareng harga hijianna. Contona: “Keur Kang Dadan, kaos 5, hijianna 75 rébu.”"
+      : "Siap, Bos! Mari buat invoice. Sebutkan nama pelanggan, barang, jumlah, dan harga satuan. Contoh: “Untuk Kang Dadan, kaos 5, satuannya 75 ribu.”";
+  }
+
+  return lang==="su"
+    ? "Muhun, Bos, abdi ngartos sakedik. Supaya teu salah ngitung, tiasa dijelaskeun nami barang, jumlah, sareng harga hijianna? Abdi ogé tiasa ngabantosan nyusun invoice, diskon, sareng sésa tagihan."
+    : "Baik, Bos. Agar tidak salah menghitung, bisa sebutkan nama barang, jumlah, dan harga satuannya? Saya juga bisa membantu menyusun invoice, diskon, dan sisa tagihan.";
+}
+
+function sendChat(forcedText){
+  const input=$("chatInput");
+  const text=String(forcedText ?? input.value).trim();
+  if(!text) return;
+
+  addMessage(text,"user");
+  input.value="";
+
+  const response=replyTo(text);
+  setTimeout(()=>sayReply(response),180);
+}
+
+$("sendBtn").addEventListener("click",()=>sendChat());
+$("chatInput").addEventListener("keydown",e=>{
+  if(e.key==="Enter" && !e.shiftKey){
+    e.preventDefault();
+    sendChat();
+  }
+});
+document.querySelectorAll("[data-prompt]").forEach(btn=>{
+  btn.addEventListener("click",()=>sendChat(btn.dataset.prompt));
+});
+
+$("voiceToggle").addEventListener("click",()=>{
+  voiceEnabled=!voiceEnabled;
+  $("voiceToggle").textContent=voiceEnabled?"🔊 Suara ON":"🔇 Suara OFF";
+  if(!voiceEnabled && "speechSynthesis" in window) window.speechSynthesis.cancel();
+  try{
+    localStorage.setItem(SETTINGS_KEY,JSON.stringify({voiceEnabled,language:getLanguage()}));
+  }catch(e){}
+  toast(voiceEnabled?"Suara AI diaktifkan.":"Suara AI dimatikan.");
+});
+
+$("repeatBtn").addEventListener("click",()=>{
+  if(lastSpoken) speak(lastSpoken);
+  else toast("Belum ada jawaban suara untuk diulang.");
+});
+
+function setupRecognition(){
+  const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SpeechRecognition){
+    $("micBtn").addEventListener("click",()=>{
+      toast("Mikrofon belum didukung browser ini. Coba Chrome terbaru atau gunakan chat teks.");
+    });
+    return;
+  }
+
+  recognition=new SpeechRecognition();
+  recognition.continuous=false;
+  recognition.interimResults=false;
+  recognition.lang="id-ID";
+
+  recognition.onstart=()=>{
+    $("micBtn").classList.add("active");
+    $("micBtn").textContent="🎙️ Ngadengekeun...";
+  };
+  recognition.onend=()=>{
+    $("micBtn").classList.remove("active");
+    $("micBtn").textContent="🎙️ Ngomong";
+  };
+  recognition.onerror=(event)=>{
+    toast(event.error==="not-allowed"
+      ?"Izin mikrofon ditolak. Aktifkan izin mikrofon di browser."
+      :"Mikrofon tidak berhasil digunakan. Coba lagi atau ketik pesan.");
+  };
+  recognition.onresult=event=>{
+    const spoken=event.results[0][0].transcript;
+    $("chatInput").value=spoken;
+    sendChat(spoken);
+  };
+
+  $("micBtn").addEventListener("click",()=>{
+    try{
+      recognition.lang=getLanguage()==="su"?"id-ID":"id-ID";
+      recognition.start();
+    }catch(e){
+      toast("Mikrofon sedang aktif atau belum siap. Coba sebentar lagi.");
+    }
+  });
+}
+
+$("language").addEventListener("change",()=>{
+  try{
+    localStorage.setItem(SETTINGS_KEY,JSON.stringify({voiceEnabled,language:getLanguage()}));
+  }catch(e){}
+  toast(getLanguage()==="su"?"Basa Sunda dipilih.":"Bahasa Indonesia dipilih.");
+});
+
+$("addItemBtn").addEventListener("click",()=>addItem());
+$("discount").addEventListener("input",renderTotals);
+$("paid").addEventListener("input",renderTotals);
+$("saveBtn").addEventListener("click",saveInvoice);
+$("printBtn").addEventListener("click",printInvoice);
+$("whatsappBtn").addEventListener("click",shareWhatsApp);
+$("newBtn").addEventListener("click",newInvoice);
+$("clearBtn").addEventListener("click",()=>{
+  if(!confirm("Kosongkan semua rincian invoice yang sedang dibuka?")) return;
+  $("customerName").value="";
+  $("discount").value=0;
+  $("paid").value=0;
+  $("invoiceNote").value="";
+  items=[{name:"",qty:1,price:0}];
+  currentInvoiceId=null;
+  $("invoiceNumber").value=generateNumber();
+  renderItems();
+  toast("Formulir dikosongkan.");
+});
+$("exportBtn").addEventListener("click",exportHistory);
+$("historyJump").addEventListener("click",()=>$("historyPanel").scrollIntoView({behavior:"smooth"}));
+
+/* ---------------- STARTUP ---------------- */
+
+function init(){
+  $("invoiceNumber").value=generateNumber();
+  $("invoiceDate").value=localDate();
+  items=[{name:"",qty:1,price:0}];
+
+  try{
+    const saved=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+    if(Array.isArray(saved)) history=saved;
+  }catch(e){
+    history=[];
+  }
+
+  try{
+    const settings=JSON.parse(localStorage.getItem(SETTINGS_KEY)||"{}");
+    if(typeof settings.voiceEnabled==="boolean") voiceEnabled=settings.voiceEnabled;
+    if(settings.language==="id"||settings.language==="su") $("language").value=settings.language;
+  }catch(e){}
+
+  $("voiceToggle").textContent=voiceEnabled?"🔊 Suara ON":"🔇 Suara OFF";
+  renderItems();
+  renderHistory();
+  setupRecognition();
+
+  if("speechSynthesis" in window){
+    window.speechSynthesis.getVoices();
+  }
+}
+
+init();
+</script>
+</body>
+</html>
+```
